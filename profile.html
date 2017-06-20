@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>My Profile</title>
+
+    <!-- Boostrap Stylesheet -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <!-- Our own CSS stylesheet -->
+    <link rel="stylesheet" href="assets/css/styles.css" media="screen">
+
+    <style type="text/css">
+      body{
+        background-color:#F70D1A;
+      }
+      .navbar-right-custom {
+        font-size:25px;
+      }
+      nav {
+        padding-left:10%;
+        padding-right:10%;
+        padding-bottom:10px;
+      }
+      .userName {
+        font-size: 30px;
+        text-align: center;
+        padding:20px;
+      }
+      .about-me-content {
+        border:solid;
+        overflow:auto;
+        background-color:white;
+        text-align: center;
+        padding:20px;
+      }
+      .hate-content{
+        border:solid;
+        height:600px;
+        background-color:white;
+        text-align: center;
+        padding:20px;
+      }
+      .wrap {
+        padding-bottom:15px;
+      }
+      #profile-image {
+        padding:10px;
+      }
+      footer {
+        background-color:#FBBBB9;
+        padding:10px;
+        width:100%;
+        font-size: 15px;
+      }
+      
+      /* Input Button Styling */
+
+      label.upload-image{
+        width: 100px;
+        height: 40px;
+        background-color: black;
+        text-align: center;
+        color: white;
+      }
+
+      #restaurant-area{
+        border:solid;
+        height:100px;
+        background-color:white;
+        text-align: center;
+        padding:20px;
+      }
+
+
+      input#file{
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <!-- Start of navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid navbar-custom">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="row">
+          <div class="navbar-header">
+ 
+            <div class="col-xs-12 phone-nav">
+              <span class="navbar-brand userName" href="#" >Username</span>
+            </div>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right navbar-right-custom">
+              <li><a href="profile.html">My Profile</a></li>
+              <li><a href="survey.html">Survey</a></li>
+              <li><a href="index.html">Log Out</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- End of navbar -->
+
+
+    <!-- Start of content wrap -->
+    <div class="wrap">
+      <div class="container">
+        <section class="row">
+          <div class="col-md-4">
+            <article class="about-me-content">
+
+              <!-- Sumbit Photo -->
+  
+              <h3> Upload a profile photo</h3>
+              <label class="image-upload">
+              <input type="file" class="image-upload" id="imgFile">
+              </label>
+              <button type="btn btn-primary" id="uploadButton" onclick="uploadFile()">
+              Submit</button>
+              <hr>
+
+               <!--  Captured Form Info-->
+            <div id="demographics">
+              <p id="name"></p>
+              <p id="location"></p>
+              <p id="age"></p>
+              <p id="gender"></p>
+            </div>
+
+              <!-- Profile Form to capture info-->
+         <form id="profile-info">
+              <label for="email-input">Email:</label>
+              <input class="form-control" id="profile-email" type="text">
+              <label for="first-name-input">First Name:</label>
+              <input class="form-control" id="profile-first-name" type="text">
+              <label for="last-name-input">Last Name:</label>
+              <input class="form-control" id="profile-last-name" type="text">
+              <label for="age-input">Age:</label>
+              <input class="form-control" id="profile-age" type="text">
+              <label for="gender-input">Gender:</label>
+              <input class="form-control" id="profile-gender" type="text">
+              <label for="city-input">City:</label>
+              <input class="form-control" id="profile-city" type="text">
+              <label for="state-input">State:</label>
+              <input class="form-control" id="profile-state" type="text">
+              <button class="btn btn-default" id="add-profile" type="submit">Submit</button>
+          </form>
+            </article>
+
+          </div>
+          <div class="col-md-8">
+            <!-- Start of Connect With Me Area -->
+            <div class="row">
+            <div id="restaurant-area">
+              <span id="location-form">
+                <input type="text" id="location-input">
+                <input id="add-location" type="submit" value="Enter Location">
+                
+               <div id="restaurantDisplay" class="restaurantDiv"></div>
+
+              </span>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+            <section id="hate-area">
+              <div class="hate-content">
+                <h1 class="hate-header">See Other Haters</h1>
+                  <div id="images">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- End of content wrap -->
+
+    <!-- Start of footer -->
+<div class="row">
+  <footer class="footer">
+    <section id="social-media-area" style="text-align:center">
+      <div class="social-media-content">
+        <div class="images">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+        </div>
+      </div>
+      <div class="about-us">
+        <a href="#" class="info">About Us</a>
+        <a href="#" class="info">Company</a>
+      </div>
+      <div class="copyright">&copy; Hate Date 2017</div>
+    </section>
+    </div>
+  </footer>      
+</div>
+    <!-- End of footer -->
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+<script src="profile.js"></script>
+    
+    
+  </body>
+
+</html>
