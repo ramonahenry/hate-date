@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HateDate html</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+
+
+</head>
+<body>
+  <!-- Navbar goes here -->
+  <nav class="navbar navbar-default">
+     <div class="container-fluid navbar-custom">
+
+       <!-- Brand and toggle get grouped for better mobile display -->
+       <div class="row">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+             <span class="sr-only">Toggle navigation</span>
+           </button>
+           <div class="col-xs-12 phone-nav">
+             <span class="navbar-brand" id="userName">Username</span>
+           </div>
+         </div>
+
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           <ul class="nav navbar-nav navbar-right navbar-right-custom">
+             <li><a href="profile.html">Profile</a></li>
+             <li><a href="survey.html">Survey</a></li>
+             <li><a href="index.html">Logout</a></li>
+           </ul>
+         </div><!-- /.navbar-collapse -->
+       </div>
+     </div><!-- /.container-fluid -->
+   </nav>
+
+<!-- jumbotron header  -->
+
+    <div class="container text-center">
+      <div class="row">
+        <h2>HateDate Survey Questions</h2>
+        <h3>Click the items that you HATE!</h3>
+      </div>
+    </div>
+
+
+  <div class="mainArea col-md-12 col-md-10 col-md-offset-1 col-md-offset-2">
+
+  </div>
+
+    <!--Survey questions (as buttons to click) go here  -->
+  <div id ="wrapper">
+    <div id="buttons-view" class="container">
+      <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+
+            </div>
+
+              <button class="btn btn-default" id="saved-hates" type="submit">Submit</button>
+          </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<!-- Firebase -->
+<!--<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script> -->
+<!-- jQuery -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.map"></script> -->
+<!-- Script -->
+<script type="text/javascript" src= "survey.js"></script>
+</body>
+</html>

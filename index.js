@@ -28,7 +28,6 @@ function getUiConfig() {
     'callbacks': {
       // Called when the user has been successfully signed in.
       'signInSuccess': function(user, credential, redirectUrl) {
-        window.location.assign("profile.html")  
       }
     },
     // Opens IDP Providers sign-in flow in a popup.
@@ -70,6 +69,7 @@ var handleSignedInUser = function(user) {
     document.getElementById('photo').style.display = 'none';
   }
 
+        window.location.assign("profile.html")  
 };
 
 

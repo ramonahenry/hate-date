@@ -14,10 +14,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
-    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
@@ -49,7 +45,7 @@
         text-align: center;
         padding:20px;
       }
-      .hate-content{
+      .hatebox{
         border:solid;
         height:600px;
         background-color:white;
@@ -84,6 +80,14 @@
         height:100px;
         background-color:white;
         text-align: center;
+        padding:20px;
+      }
+
+      #hate-content{
+        float:left;
+      }
+
+      .box {
         padding:20px;
       }
 
@@ -187,12 +191,42 @@
           <div class="col-md-8">
             <div class="row">
             <section id="hate-area">
-              <div class="hate-content">
+              <div class="hatebox">
                 <h1 class="hate-header">See Other Haters</h1>
-                  <div id="images">
-                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
-                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
-                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                  <div id="hate-content">
+                  <div class="panel-body">
+                    <table class="table table-hover" id="">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Gender</th>
+                          <th>Age</th>
+                          <th>Link</th>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                  <div class="modal-dialog">
+
+                                 <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Some text in the modal.</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div> 
                 </div>
               </div>
             </section>

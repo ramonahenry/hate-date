@@ -20,12 +20,13 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
+var user = firebase.auth().currentUser;
 var database = firebase.database();
 var storage = firebase.storage().ref();
 
 database.ref().on("child_added", function(childsnapshot) {
 
+  var user = childsnapshot.val().user;
   var profileAge = childsnapshot.val().profileAge;
   var profileEmail = childsnapshot.val().profileEmail;
   var profileFirstName = childsnapshot.val().profileFirstName;
@@ -57,11 +58,32 @@ database.ref().on("child_added", function(childsnapshot) {
   var Q21 = childsnapshot.val().Q21;
   var Q22 = childsnapshot.val().Q22;
   var Q23 = childsnapshot.val().Q23;
-             
+  
+  $("#age").html("Age: " + profileAge);
+  $("#location").html("Location: " + profileCity + ", " + profileState);
+  $("#gender").html("Gender: " + profileGender);
+  $("#name").html("Name: " + profileFirstName + " " + profileLastName)
+
+  if (firebase.auth().currentUser.uid !== user) {
+    $("#hate-content").append(
+    "<tr><td class='box'>" + profileFirstName + "</td>"
+    +"<td>" + profileLastName + "</td>"
+    +"<td class='box'>" + profileGender + "</td>"
+    +"<td>" + profileAge + "</td>"
+    +"<td class='box'>" + "<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal'></button>" + "</td></tr>");
+
+
+
+
+
+      // profileFirstName +" "+ profileLastName +"<br>" + profileGender + ", " + profileAge)
+  }
+
+
+
 });
 
 $("#add-profile").on("click", function() {
-  
   var questionVal = false;
   var profileAge = $("#profile-age").val().trim().toUpperCase();
   var profileEmail = $("#profile-email").val().trim();
@@ -70,8 +92,10 @@ $("#add-profile").on("click", function() {
   var profileGender = $("#profile-gender").val().trim().toUpperCase();
   var profileCity = $("#profile-city").val().trim().toUpperCase();
   var profileState = $("#profile-state").val().trim().toUpperCase();
+  var user = firebase.auth().currentUser.uid;
   
   var newProfile = {
+    user:user,
     profileEmail: profileEmail,
     profileAge: profileAge,
     profileFirstName: profileFirstName,
@@ -105,13 +129,12 @@ $("#add-profile").on("click", function() {
     Q23: questionVal
   }
 
-      // Hide the input form once it is submitted
-  $("#profile-info").hide();
+
+  database.ref().push(newProfile);
+  //     // Hide the input form once it is submitted
+  // 
   //  push captured info to divs
-  $("#age").html("Age: " + profileAge);
-  $("#location").html("Location: " + profileCity + ", " + profileState);
-  $("#gender").html("Gender: " + profileGender);
-  $("#name").html(profileFirstName + " " + profileLastName)
+  
 
     // var updateProfile = {
 
@@ -151,7 +174,6 @@ $("#add-profile").on("click", function() {
     // }
 
     //console.log(newProfile);
-    database.ref().push(newProfile);
 
     return false;
 });
