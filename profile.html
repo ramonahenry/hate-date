@@ -11,22 +11,18 @@
     <!-- Boostrap Stylesheet -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-    <script src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
-    <!-- Our own CSS stylesheet -->
-    <link rel="stylesheet" href="assets/css/styles.css" media="screen">
+    <!-- Our own CSS stylesheet --><!-- 
+    <link rel="stylesheet" href="assets/css/styles.css" media="screen"> -->
 
     <style type="text/css">
       body{
-        background-color:#F70D1A;
+        background-color: Indianred;
       }
       .navbar-right-custom {
         font-size:25px;
+        padding-top:10px;
       }
       nav {
         padding-left:10%;
@@ -40,6 +36,7 @@
       }
       .about-me-content {
         border:solid;
+        height:700px;
         overflow:auto;
         background-color:white;
         text-align: center;
@@ -96,6 +93,16 @@
 
       }
 
+      .modal-title, .panel-title {
+        text-align: center;
+      }
+
+      #modal-body{
+        text-align: center;
+        padding:5px;
+        font-size: 20px;
+      }
+
     </style>
 
   </head>
@@ -110,7 +117,7 @@
           <div class="navbar-header">
  
             <div class="col-xs-12 phone-nav">
-              <span class="navbar-brand userName" href="#" >Username</span>
+              <img src="logo.JPG" id="logo">
             </div>
           </div>
 
@@ -190,19 +197,23 @@
           </div>
           <div class="col-md-8">
             <div class="row">
-            <section id="hate-area">
-              <div class="hatebox">
-                <h1 class="hate-header">See Other Haters</h1>
-                  <div id="hate-content">
+           
+
+  <div class="row">
+      <div class="col-lg-12">
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+           <h3 class="panel-title"><strong>What Others Hate</strong></h3>
+          </div>
                   <div class="panel-body">
-                    <table class="table table-hover" id="">
+                    <table class="table table-hover" id="hate-content">
                       <thead>
                         <tr>
-                          <th>Name</th>
+                          <th>Full Name</th>
                           <th>Gender</th>
                           <th>Age</th>
                           <th>Link</th>
-
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal" role="dialog">
                                   <div class="modal-dialog">
@@ -211,10 +222,9 @@
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Modal Header</h4>
+                                    <h4 class="modal-title">The Things They Hate</h4>
                                   </div>
-                                  <div class="modal-body">
-                                    <p>Some text in the modal.</p>
+                                  <div id="modal-body">
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -223,7 +233,7 @@
                               </div>
                             </div>
                         </tr>
-                      </thead>
+                        </thead>
                       <tbody></tbody>
                     </table>
                   </div> 

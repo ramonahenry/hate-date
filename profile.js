@@ -20,68 +20,57 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var user = firebase.auth().currentUser;
+
 var database = firebase.database();
 var storage = firebase.storage().ref();
+var user = firebase.auth().currentUser;
 
-database.ref().on("child_added", function(childsnapshot) {
+var ref = database.ref('user');
+ref.on('value',gotData,errData)
 
-  var user = childsnapshot.val().user;
-  var profileAge = childsnapshot.val().profileAge;
-  var profileEmail = childsnapshot.val().profileEmail;
-  var profileFirstName = childsnapshot.val().profileFirstName;
-  var profileLastName = childsnapshot.val().profileLastName;
-  var profileGender = childsnapshot.val().profileGender;
-  var profileCity = childsnapshot.val().profileCity;
-  var profileState = childsnapshot.val().profileState;
-  var Q0 = childsnapshot.val().Q0;
-  var Q1 = childsnapshot.val().Q1;
-  var Q2 = childsnapshot.val().Q2;
-  var Q3 = childsnapshot.val().Q3;
-  var Q4 = childsnapshot.val().Q4;
-  var Q5 = childsnapshot.val().Q5;
-  var Q6 = childsnapshot.val().Q6;
-  var Q7 = childsnapshot.val().Q7;
-  var Q8 = childsnapshot.val().Q8;
-  var Q9 = childsnapshot.val().Q9;
-  var Q10 = childsnapshot.val().Q10;
-  var Q11 = childsnapshot.val().Q11;
-  var Q12 = childsnapshot.val().Q12;
-  var Q13 = childsnapshot.val().Q13;
-  var Q14 = childsnapshot.val().Q14;
-  var Q15 = childsnapshot.val().Q15;
-  var Q16 = childsnapshot.val().Q16;
-  var Q17 = childsnapshot.val().Q17;
-  var Q18 = childsnapshot.val().Q18;
-  var Q19 = childsnapshot.val().Q19;
-  var Q20 = childsnapshot.val().Q20;
-  var Q21 = childsnapshot.val().Q21;
-  var Q22 = childsnapshot.val().Q22;
-  var Q23 = childsnapshot.val().Q23;
+function gotData(data) {
+  console.log(data.val())
+  var scores = data.val();
+  var keys = Object.keys(scores);
+  console.log(keys);  
+
+  console.log(scores[keys[0]].user)
+}
+function errData(err) {
+  console.log('Error!')
+  console.log(err);
+}
+
+
+// database.ref().on("child_added", function(childsnapshot) {
+
+//   var user = childsnapshot.val().user;
+//   var profileAge = childsnapshot.val().profileAge;
+//   var profileEmail = childsnapshot.val().profileEmail;
+//   var profileFirstName = childsnapshot.val().profileFirstName;
+//   var profileLastName = childsnapshot.val().profileLastName;
+//   var profileGender = childsnapshot.val().profileGender;
+//   var profileCity = childsnapshot.val().profileCity;
+//   var profileState = childsnapshot.val().profileState;
   
-  $("#age").html("Age: " + profileAge);
-  $("#location").html("Location: " + profileCity + ", " + profileState);
-  $("#gender").html("Gender: " + profileGender);
-  $("#name").html("Name: " + profileFirstName + " " + profileLastName)
+//   $("#age").html("Age: " + profileAge);
+//   $("#location").html("Location: " + profileCity + ", " + profileState);
+//   $("#gender").html("Gender: " + profileGender);
+//   $("#name").html("Name: " + profileFirstName + " " + profileLastName)
 
-  if (firebase.auth().currentUser.uid !== user) {
-    $("#hate-content").append(
-    "<tr><td class='box'>" + profileFirstName + "</td>"
-    +"<td>" + profileLastName + "</td>"
-    +"<td class='box'>" + profileGender + "</td>"
-    +"<td>" + profileAge + "</td>"
-    +"<td class='box'>" + "<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal'></button>" + "</td></tr>");
+//   if (firebase.auth().currentUser.uid !== user) {
+//     $("#hate-content").append(
+//     "<tr><td class='box'>" + profileFirstName + "</td>"
+//     +"<td>" + profileLastName + "</td>"
+//     +"<td class='box'>" + profileGender + "</td>"
+//     +"<td>" + profileAge + "</td>"
+//     +"<td class='box'>" + "<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal'></button>" + "</td></tr>");
 
-
-
-
-
-      // profileFirstName +" "+ profileLastName +"<br>" + profileGender + ", " + profileAge)
-  }
+//       // profileFirstName +" "+ profileLastName +"<br>" + profileGender + ", " + profileAge)
+//   }
 
 
-
-});
+// });
 
 $("#add-profile").on("click", function() {
   var questionVal = false;
@@ -93,9 +82,10 @@ $("#add-profile").on("click", function() {
   var profileCity = $("#profile-city").val().trim().toUpperCase();
   var profileState = $("#profile-state").val().trim().toUpperCase();
   var user = firebase.auth().currentUser.uid;
-  
+  var pushedAnswers = [];
+
   var newProfile = {
-    user:user,
+    user: user,
     profileEmail: profileEmail,
     profileAge: profileAge,
     profileFirstName: profileFirstName,
@@ -103,80 +93,85 @@ $("#add-profile").on("click", function() {
     profileGender: profileGender,
     profileCity: profileCity,
     profileState: profileState,
-    Q0: questionVal,
-    Q1: questionVal,
-    Q2: questionVal,
-    Q3: questionVal,
-    Q4: questionVal,
-    Q5: questionVal,
-    Q6: questionVal,
-    Q7: questionVal,
-    Q8: questionVal,
-    Q9: questionVal,
-    Q10: questionVal,
-    Q11: questionVal,
-    Q12: questionVal,
-    Q13: questionVal,
-    Q14: questionVal,
-    Q15: questionVal,
-    Q16: questionVal,
-    Q17: questionVal,
-    Q18: questionVal,
-    Q19: questionVal,
-    Q20: questionVal,
-    Q21: questionVal,
-    Q22: questionVal,
-    Q23: questionVal
+    hates: pushedAnswers
   }
 
-
-  database.ref().push(newProfile);
-  //     // Hide the input form once it is submitted
-  // 
-  //  push captured info to divs
-  
-
-    // var updateProfile = {
-
-    //     profileEmail: profileEmail,
-    //     profileAge: profileAge,
-    //     profileFirstName: profileFirstName,
-    //     profileLastName: profileLastName,
-    //     profileGender: profileGender,
-    //     profileCity: profileCity,
-    //     profileState: profileState,
-    //     Q0: qAnswers[0],
-    //     Q1: qAnswers[1],
-    //     Q2: qAnswers[2],
-    //     Q3: qAnswers[3],
-    //     Q4: qAnswers[4],
-    //     Q5: qAnswers[5],
-    //     Q6: qAnswers[6],
-    //     Q7: qAnswers[7],
-    //     Q8: qAnswers[8],
-    //     Q9: qAnswers[9],
-    //     Q10: qAnswers[10],
-    //     Q11: qAnswers[11],
-    //     Q12: qAnswers[12],
-    //     Q13: qAnswers[13],
-    //     Q14: qAnswers[14],
-    //     Q15: qAnswers[15],
-    //     Q16: qAnswers[16],
-    //     Q17: qAnswers[17],
-    //     Q18: qAnswers[18],
-    //     Q19: qAnswers[19],
-    //     Q20: qAnswers[20],
-    //     Q21: qAnswers[21],
-    //     Q22: qAnswers[22],
-    //     Q23: qAnswers[23],
-    //    
-
-    // }
-
-    //console.log(newProfile);
-
-    return false;
+  database.ref().child('user').push(newProfile);
 });
+
+
+var ref = firebase.database().ref('user');
+ref.on("child_added", function(childsnapshot) {
+  var user = childsnapshot.val().user;
+  var profileAge = childsnapshot.val().profileAge;
+  var profileEmail = childsnapshot.val().profileEmail;
+  var profileFirstName = childsnapshot.val().profileFirstName;
+  var profileLastName = childsnapshot.val().profileLastName;
+  var profileGender = childsnapshot.val().profileGender;
+  var profileCity = childsnapshot.val().profileCity;
+  var profileState = childsnapshot.val().profileState;
+  
+  if ( firebase.auth().currentUser.uid === user ) {
+    $("#age").html("Age: " + profileAge);
+    $("#location").html("Location: " + profileCity + ", " + profileState);
+    $("#gender").html("Gender: " + profileGender);
+    $("#name").html("Name: " + profileFirstName + " " + profileLastName)
+    console.log(user)
+    console.log(profileFirstName);
+    $("#profile-info").hide();
+  }
+
+ if (firebase.auth().currentUser.uid !== user) {
+    $("#hate-content").append(
+    "<tr><td class='box'>" + profileFirstName +" "+profileLastName + "</td>"
+    +"<td class='box'>" + profileGender + "</td>"
+    +"<td>" + profileAge + "</td>"
+    +"<td class='box'>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#myModal'>"+"Hates"+"</button>" + "</td></tr>");
+
+    // profileFirstName +" "+ profileLastName +"<br>" + profileGender + ", " + profileAge)
+  }
+
+});
+
+
+var ref = database.ref('hates');
+ref.on('value',gotData)
+
+function gotData(data) {
+  console.log(data.val())
+  var scores = data.val();
+  var keys = Object.keys(scores);
+  console.log(keys);  
+  console.log(scores[keys[0]].hates)
+  
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var score = scores[k].hates;
+      var displayHate = $("<div>")
+      displayHate.text(score)
+      displayHate.addClass("hateStyle")
+      console.log(scores[keys[i]].user)
+
+    if (firebase.auth().currentUser.uid === scores[keys[i]].user) {
+      $("#modal-body").append(displayHate);
+    }
+  }
+}
+
+// var ref = firebase.database().ref('hates');
+// ref.on("child_added", function(childsnapshot) {
+//   var user = childsnapshot.val().user;
+//   var hates = childsnapshot.val().hates;
+
+//   if (firebase.auth().currentUser.uid !== user) {
+//     for (var i = 0; i < keys.length; i++) {
+//       var k = keys[i];
+
+//       $(".modal-body").append(hates)
+//     }
+//     }
+// });
+
 
 var selectedFile;
 
@@ -227,3 +222,5 @@ $("#restaurantDisplay").html(restaurantResults);
 
 });
 });
+
+
