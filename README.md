@@ -1,3 +1,3 @@
 Hate Date
 
-https://davidrwu.github.io/project1/
+https://davidrwu.github.io/hate-date
