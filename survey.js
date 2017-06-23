@@ -51,7 +51,7 @@ $(".mainArea").on('click', '.btn-danger', function(event){
   pushedAnswers.push(buttonText)
   console.log(pushedAnswers)
   var user = firebase.auth().currentUser.uid;
-  var email = firebase.auth().currentUser.email;
+
   var pushed = {
     hates : buttonText,
     user:user,
