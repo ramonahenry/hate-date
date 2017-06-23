@@ -50,10 +50,12 @@ $(".mainArea").on('click', '.btn-danger', function(event){
   var buttonText = $(this).attr("data-name");
   pushedAnswers.push(buttonText)
   console.log(pushedAnswers)
-  var user = firebase.auth().currentUser.uid
+  var user = firebase.auth().currentUser.uid;
+  var email = firebase.auth().currentUSer.email;
   var pushed = {
     hates : buttonText,
-    user:user
+    user:user,
+    email:email
   }
 
   database.ref().child('hates').push(pushed);
