@@ -23,6 +23,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 var storage = firebase.storage().ref();
+var profileImageURL;//*****Added
+var selectedFile; //****Added 
 var user = firebase.auth().currentUser;
 
 var ref = database.ref('user');
@@ -74,6 +76,7 @@ function errData(err) {
 
 $("#add-profile").on("click", function() {
   var questionVal = false;
+  
   var profileAge = $("#profile-age").val().trim().toUpperCase();
   var profileEmail = $("#profile-email").val().trim();
   var profileFirstName = $("#profile-first-name").val().trim().toUpperCase();
@@ -93,6 +96,7 @@ $("#add-profile").on("click", function() {
     profileGender: profileGender,
     profileCity: profileCity,
     profileState: profileState,
+    profileImageURL: profileImageURL,                             //Added Profile Image -RH
     hates: pushedAnswers
   }
 
@@ -112,13 +116,30 @@ ref.on("child_added", function(childsnapshot) {
   var profileState = childsnapshot.val().profileState;
   
   if ( firebase.auth().currentUser.uid === user ) {
-    $("#age").html("Age: " + profileAge);
-    $("#location").html("Location: " + profileCity + ", " + profileState);
-    $("#gender").html("Gender: " + profileGender);
-    $("#name").html("Name: " + profileFirstName + " " + profileLastName)
-    console.log(user)
-    console.log(profileFirstName);
-    $("#profile-info").hide();
+    // Hide the input form and upload buttons once they are submitted
+      $("#profile-info").hide();
+      //  push captured info to divs
+      $("#age").html("Age: " + profileAge);
+      $("#location").html("Location: " + profileCity + ", " + profileState);
+      $("#gender").html("Gender: " + profileGender);
+      $("#prof-name").html(profileFirstName + " " + profileLastName);
+
+
+
+    
+      database.ref().push(newProfile); //add new record to Firebase Database
+
+        return false;
+});
+    
+    
+    //$("#age").html("Age: " + profileAge);
+    //$("#location").html("Location: " + profileCity + ", " + profileState);
+    //$("#gender").html("Gender: " + profileGender);
+    //$("#name").html("Name: " + profileFirstName + " " + profileLastName)
+    //console.log(user)
+    //console.log(profileFirstName);
+    //$("#profile-info").hide();
   }
 
  if (firebase.auth().currentUser.uid !== user) {
@@ -173,28 +194,44 @@ function gotData(data) {
 // });
 
 
-var selectedFile;
+//Add profile image to Firebase Storage
 
-$("#imgFile").on("change", function(event){
+ $("#imgFile").on("change", function(event){
+   
     selectedFile = event.target.files[0];
-});
+   });
 
-function uploadFile(){
-  var filename = selectedFile.name;
-  var storageRef = firebase.storage().ref("profile-images/" + filename);
-  var uploadTask = storageRef.put(selectedFile);
+   function uploadFile(){
+      var filename = selectedFile.name;
+      console.log(selectedFile);
+      var storageRef = firebase.storage().ref("profile-images/" + filename);
+      var uploadTask = storageRef.put(selectedFile);
+ 
+  //On change get the URL for the image that was saved to the Firebase Storage Bucket
+    uploadTask.on("state_changed", function(snapshot){
 
-  uploadTask.on("state-changed", function(snapshot){
+      }, function(error){
 
-  }, function(error){
+      }, 
 
-  }, function(){
+     function(){
 
-    var downloadURL = uploadTask.snapshot.downloadURL;
-    consolelog(downloadURL);
+      storageRef.getDownloadURL().then(function(url) {
+      console.log(profileImageURL);
+      profileImageURL = url;                                  //save url to global variable
+      $("#profile-pic").attr("src", profileImageURL);         //apply the url src to the profile-pic image tag
+
+      //Hide the submit Buttons.
+      $(".hide-after-submit").hide();
+
   });
-}
 
+
+  });
+
+
+}
+  
 $("#add-location").on("click", function(event) {
 
 event.preventDefault();
