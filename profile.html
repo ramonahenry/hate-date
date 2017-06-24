@@ -11,7 +11,21 @@
     <!-- Boostrap Stylesheet -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    
+    
+    <!--Java Script and Firebase links -->
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase-storage.js"></script>
 
     <!-- Our own CSS stylesheet --><!-- 
     <link rel="stylesheet" href="assets/css/styles.css" media="screen"> -->
@@ -144,15 +158,23 @@
 
               <!-- Sumbit Photo -->
   
+              <!-- Sumbit Photo -->
+              <div class="hide-after-submit">
               <h3> Upload a profile photo</h3>
+              
               <label class="image-upload">
               <input type="file" class="image-upload" id="imgFile">
               </label>
               <button type="btn btn-primary" id="uploadButton" onclick="uploadFile()">
               Submit</button>
+              </div>
               <hr>
+              <div>
+              <img id="profile-pic" height="125" width="125"/>
+              </div>
 
-              <img height="125" width="125"/>
+
+             
                <!--  Captured Form Info-->
             <div id="demographics">
               <p id="name"></p>
